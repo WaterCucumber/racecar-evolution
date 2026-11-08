@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://un17indw3ln0"]
+
+[ext_resource type="Script" uid="uid://c5l6dctfhtxaa" path="res://scenes/player/Player.cs" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://ba5y3bq5boi37" path="res://scenes/agent/camera_2d_follow.gd" id="2_gmlin"]
+
+[sub_resource type="Gradient" id="Gradient_mhie3"]
+offsets = PackedFloat32Array(0.7582418, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_weoey"]
+gradient = SubResource("Gradient_mhie3")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p51cl"]
+gradient = SubResource("Gradient_mhie3")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v6ifw"]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_weoey"]
+radius = 15.0
+
+[node name="Player" type="CharacterBody2D" unique_id=514686403 node_paths=PackedStringArray("_collisionCheckArea")]
+collision_layer = 0
+script = ExtResource("1_dovo2")
+_collisionCheckArea = NodePath("CollisionCheckArea")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1622603587]
+texture = SubResource("GradientTexture2D_weoey")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1481062837]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(8, 0)
+texture = SubResource("GradientTexture2D_p51cl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1865973664]
+visible = false
+shape = SubResource("CircleShape2D_v6ifw")
+
+[node name="CollisionCheckArea" type="Area2D" parent="." unique_id=68036556]
+visible = false
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionCheckArea" unique_id=167462037]
+shape = SubResource("CircleShape2D_weoey")
+
+[node name="Camera2DFollow" type="Camera2D" parent="." unique_id=2135861482]
+top_level = true
+position_smoothing_enabled = true
+script = ExtResource("2_gmlin")

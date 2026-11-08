@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cngwyshpak40e"]
+
+[ext_resource type="Script" uid="uid://bis6tbbm6un5t" path="res://scenes/map_segment/MapSegment.cs" id="1_ypm4v"]
+[ext_resource type="Script" uid="uid://cjm4t4ibuh6xa" path="res://components/Checkpoints.cs" id="2_486wq"]
+
+[node name="MapSegment" type="Node2D" unique_id=240717425 node_paths=PackedStringArray("StartBox", "StartPoint", "EndPoint", "Checkpoints")]
+script = ExtResource("1_ypm4v")
+Size = Vector2(384, 128)
+StartBox = NodePath("StartStaticColliders")
+StartPoint = NodePath("StartPoint")
+EndPoint = NodePath("EndPoint")
+Checkpoints = NodePath("Checkpoints")
+metadata/_edit_lock_ = true
+
+[node name="StartPoint" type="Marker2D" parent="." unique_id=554048740]
+position = Vector2(0, 64)
+
+[node name="EndPoint" type="Marker2D" parent="." unique_id=928817902]
+position = Vector2(384, 64)
+
+[node name="StaticColliders" type="StaticBody2D" parent="." unique_id=387945854 groups=["obstacle"]]
+metadata/_edit_lock_ = true
+
+[node name="StartStaticColliders" type="StaticBody2D" parent="." unique_id=144239105 groups=["obstacle"]]
+metadata/_edit_lock_ = true
+
+[node name="Checkpoints" type="Node2D" parent="." unique_id=773623958]
+script = ExtResource("2_486wq")
+metadata/_edit_lock_ = true
+
+[node name="Checkpoint0" type="Area2D" parent="Checkpoints" unique_id=1134308391]

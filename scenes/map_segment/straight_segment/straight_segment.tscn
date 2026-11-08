@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://bw0ig64hkxao4"]
+
+[ext_resource type="PackedScene" uid="uid://cngwyshpak40e" path="res://scenes/map_segment/map_segment.tscn" id="1_de0og"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_weoey"]
+size = Vector2(512, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_de0og"]
+size = Vector2(64, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4bsx"]
+size = Vector2(16, 96)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_weoey"]
+a = Vector2(0, -48)
+b = Vector2(0, 48)
+
+[node name="StraightSegment" unique_id=240717425 instance=ExtResource("1_de0og")]
+Size = Vector2(512, 128)
+
+[node name="EndPoint" parent="." index="1" unique_id=928817902]
+position = Vector2(512, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticColliders" parent_id_path=PackedInt32Array(387945854) index="0" unique_id=909442204]
+position = Vector2(256, 8)
+shape = SubResource("RectangleShape2D_weoey")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticColliders" parent_id_path=PackedInt32Array(387945854) index="1" unique_id=561144925]
+position = Vector2(256, 120)
+shape = SubResource("RectangleShape2D_weoey")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartStaticColliders" parent_id_path=PackedInt32Array(144239105) index="0" unique_id=454279114]
+position = Vector2(-32, 8)
+shape = SubResource("RectangleShape2D_de0og")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StartStaticColliders" parent_id_path=PackedInt32Array(144239105) index="1" unique_id=673363839]
+position = Vector2(-32, 120)
+shape = SubResource("RectangleShape2D_de0og")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StartStaticColliders" parent_id_path=PackedInt32Array(144239105) index="2" unique_id=478114895]
+position = Vector2(-56, 64)
+shape = SubResource("RectangleShape2D_o4bsx")
+
+[node name="Checkpoint0" parent="Checkpoints" parent_id_path=PackedInt32Array(773623958) index="0" unique_id=1134308391]
+position = Vector2(64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/Checkpoint0" index="0" unique_id=439373143]
+shape = SubResource("SegmentShape2D_weoey")
+debug_color = Color(5.0055983e-06, 0.6423788, 0.32400063, 0.41960785)
+
+[node name="Checkpoint1" type="Area2D" parent="Checkpoints" parent_id_path=PackedInt32Array(773623958) index="1" unique_id=1758081873]
+position = Vector2(248, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/Checkpoint1" index="0" unique_id=898518649]
+position = Vector2(8, 0)
+shape = SubResource("SegmentShape2D_weoey")
+debug_color = Color(5.0055983e-06, 0.6423788, 0.32400063, 0.41960785)
+
+[node name="Checkpoint2" type="Area2D" parent="Checkpoints" parent_id_path=PackedInt32Array(773623958) index="2" unique_id=1672595467]
+position = Vector2(448, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/Checkpoint2" index="0" unique_id=1225136531]
+shape = SubResource("SegmentShape2D_weoey")
+debug_color = Color(5.0055983e-06, 0.6423788, 0.32400063, 0.41960785)

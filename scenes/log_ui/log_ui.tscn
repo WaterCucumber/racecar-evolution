@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://x3vgiu3xekxd"]
+
+[ext_resource type="Script" uid="uid://dlf8pwquic66q" path="res://scenes/log_ui/LogUI.cs" id="1_47w1t"]
+
+[node name="LogUI" type="CanvasLayer" unique_id=1104546606 node_paths=PackedStringArray("_generation", "_difficulty", "_bestFitness", "_mutationRate", "_plato", "_agents", "_population")]
+script = ExtResource("1_47w1t")
+_generation = NodePath("DynamicVariables/GenerationLabel")
+_difficulty = NodePath("DynamicVariables/DifficultyLabel")
+_bestFitness = NodePath("DynamicVariables/BestFitnessLabel")
+_mutationRate = NodePath("DynamicVariables/MutationRateLabel")
+_plato = NodePath("DynamicVariables/PlatoLabel")
+_agents = NodePath("DynamicVariables/AgentsLabel")
+_population = NodePath("Constants/Population")
+
+[node name="DynamicVariables" type="VBoxContainer" parent="." unique_id=1145901345]
+offset_right = 124.0
+offset_bottom = 144.0
+
+[node name="GenerationLabel" type="Label" parent="DynamicVariables" unique_id=1490732719]
+layout_mode = 2
+text = "Generation: 000"
+
+[node name="DifficultyLabel" type="Label" parent="DynamicVariables" unique_id=2775127]
+modulate = Color(1, 0.33333334, 1, 1)
+layout_mode = 2
+text = "Difficulty: 1"
+
+[node name="BestFitnessLabel" type="Label" parent="DynamicVariables" unique_id=1538464177]
+modulate = Color(1, 1, 0.20784314, 1)
+layout_mode = 2
+text = "Best Fitness: 000,0000"
+
+[node name="MutationRateLabel" type="Label" parent="DynamicVariables" unique_id=2135552811]
+layout_mode = 2
+text = "Mutation Rate: 0,15"
+
+[node name="PlatoLabel" type="Label" parent="DynamicVariables" unique_id=861723650]
+layout_mode = 2
+text = "Plato: 0"
+
+[node name="AgentsLabel" type="Label" parent="DynamicVariables" unique_id=30733629]
+modulate = Color(1, 0.33333334, 0, 1)
+layout_mode = 2
+text = "Agents: 15"
+
+[node name="Constants" type="VBoxContainer" parent="." unique_id=484966867]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -124.0
+offset_bottom = 144.0
+grow_horizontal = 0
+
+[node name="Population" type="Label" parent="Constants" unique_id=618589279]
+modulate = Color(0.6955032, 0.6955031, 0.6955031, 1)
+layout_mode = 2
+text = "Population: 50"

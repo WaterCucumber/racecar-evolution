@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://lgqibjc65nwu"]
+
+[ext_resource type="PackedScene" uid="uid://c3ktwtyng7sey" path="res://scenes/track_creator/track_creator.tscn" id="1_8fcpc"]
+[ext_resource type="Script" uid="uid://bm0qq7jgdv5as" path="res://components/EvolutionManager.cs" id="1_h4ypv"]
+[ext_resource type="PackedScene" uid="uid://x3vgiu3xekxd" path="res://scenes/log_ui/log_ui.tscn" id="2_h4ypv"]
+
+[node name="AgentTeach" type="Node2D" unique_id=2079767776]
+
+[node name="TrackCreator" parent="." unique_id=1248151367 instance=ExtResource("1_8fcpc")]
+
+[node name="EvolutionManager" type="Node" parent="." unique_id=1098924430 node_paths=PackedStringArray("_trackCreator")]
+script = ExtResource("1_h4ypv")
+_trackCreator = NodePath("../TrackCreator")
+_loadFile = "best_brain-temp.json"
+
+[node name="LogUI" parent="." unique_id=1104546606 node_paths=PackedStringArray("_manager") instance=ExtResource("2_h4ypv")]
+_manager = NodePath("../EvolutionManager")
