@@ -7,6 +7,7 @@ namespace Simulation.Data;
 public class NeuralNetwork
 {
     public NeuralNetworkData Data { get; private set; }
+    public string Id { get; private set; }
 
     private static readonly Random _random = new();
 
@@ -68,7 +69,7 @@ public class NeuralNetwork
         };
     }
 
-    public void ImportData(NeuralNetworkData data)
+    public void ImportData(NeuralNetworkData data, string id)
     {
         if (data.InputSize != Data.InputSize || data.HiddenSize != Data.HiddenSize || data.OutputSize != Data.OutputSize)
         {
@@ -79,6 +80,7 @@ public class NeuralNetwork
         Data.WeightsHO = data.WeightsHO;
         Data.BiasH = data.BiasH;
         Data.BiasO = data.BiasO;
+        Id = id;
     }
     #endregion
 

@@ -2,6 +2,7 @@ using System;
 using Godot;
 using Simulation.Components;
 using Simulation.Data;
+using Simulation.Util;
 
 namespace Simulation.Scenes;
 
@@ -27,17 +28,20 @@ public abstract partial class Entity : CharacterBody2D
 
 
     public Genome GetGenome() => _genome;
-
-    public void Initialize(Genome genome, Checkpoints checkpoints)
+    public void Reset()
     {
         Visible = true;
         Rotation = default;
         Velocity = default;
         _pathPointPlaceTime = default;
-        _isStopped = default;
         _targetSpeed = default;
         _path.Points = default;
+        _isStopped = default;
+    }
 
+
+    public void Initialize(Genome genome, Checkpoints checkpoints)
+    {
         Checkpoints = checkpoints;
         _genome = genome;
 
@@ -114,3 +118,4 @@ public abstract partial class Entity : CharacterBody2D
         Stopped?.Invoke();
     }
 }
+

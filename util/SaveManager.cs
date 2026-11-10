@@ -49,8 +49,7 @@ public static class SaveManager
             
             if (data != null)
             {
-                brain.ImportData(data);
-                GD.Print("Brain was successfully imported!");
+                brain.ImportData(data, loadFile);
                 return true;
             }
         }

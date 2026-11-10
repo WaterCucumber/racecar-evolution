@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://crw64t67qjn5l"]
+
+[ext_resource type="Script" uid="uid://in1hk6vkhdne" path="res://components/AutoCamera.cs" id="1_3ry4a"]
+[ext_resource type="Script" uid="uid://be17gj1cab601" path="res://scenes/agent_race/RaceManager.cs" id="2_3ry4a"]
+[ext_resource type="PackedScene" uid="uid://x3vgiu3xekxd" path="res://scenes/log_ui/log_ui.tscn" id="3_eqvr3"]
+
+[node name="AgentRace" type="Node2D" unique_id=2079767776]
+
+[node name="AutoCamera" type="Camera2D" parent="." unique_id=629719226]
+script = ExtResource("1_3ry4a")
+
+[node name="RaceManager" type="Node2D" parent="." unique_id=1512679301]
+script = ExtResource("2_3ry4a")
+_loadFiles = PackedStringArray("best_brain.json", "best_brain_temp.json", "best_brain-T.json", "best_brain-temp.json", "evoluted-T-0.json")
+
+[node name="LogUI" parent="." unique_id=1104546606 node_paths=PackedStringArray("_manager") instance=ExtResource("3_eqvr3")]
+_manager = NodePath("")

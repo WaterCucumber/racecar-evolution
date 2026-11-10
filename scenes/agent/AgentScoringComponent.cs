@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using Simulation.Scenes;
+using Simulation.Util;
 
 namespace Simulation.Components;
 
@@ -8,10 +9,10 @@ namespace Simulation.Components;
 public class AgentScoringComponent
 {
     // TODO: Replace Hard-coded variables
-    private const float LapFitness = 150;
+    private const float LapFitness = 250;
     public const float CheckpointFitness = 50;
     private const float DeadDistanceToCheckpointFitness = 10;
-    private const float NoCheckpointMaxTime = 3.0f;
+    private const float NoCheckpointMaxTime = 5.0f;
     private const float InvalidCheckpointPenalty = 50;
     private const float NoCheckpointPenalty = 250;
     private const float BaseSlownessPenalty = 0.01f;

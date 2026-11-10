@@ -2,30 +2,24 @@ using System.Threading.Tasks;
 using Godot;
 using Simulation.Util;
 
-namespace Simulation.Scenes;
+namespace Simulation.Components;
 
 
-public partial class TrackCreator : Node
+public class TrackCreator(Node2D parent)
 {
-    [Export] private CollisionPolygon2D _outWall;
-    [Export] private CollisionPolygon2D _inWall;
-    [Export] private Checkpoints _checkpoints;
+    private readonly CollisionPolygon2D _outWall = CreatePolygon(parent);
+    private readonly CollisionPolygon2D _inWall = CreatePolygon(parent);
+    private readonly SceneTree _tree = parent.GetTree();
+    private Checkpoints _lastCheckpoints;
 
-    private Curve2D _curve;
-
-    private void Clear()
-    {
-        _outWall.Polygon = [];
-        _inWall.Polygon = [];
-        _checkpoints.Clear();
-    }
     public async Task<Checkpoints> CreateTrackAsync(int numPoints, float minSize, float maxSize)
     {
         Clear();
-        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        
-        _curve = TrackGenerator.GenerateTrack(new(1152 / 2, 648 / 2), numPoints, minSize, maxSize);
-        var data = TrackGenerator.CreatePhysicsTrack(_curve);
+        await _tree.ToSignal(_tree, SceneTree.SignalName.ProcessFrame);
+
+        Checkpoints checkpoints = new();
+        var curve = TrackGenerator.GenerateTrack(new(1152 / 2, 648 / 2), numPoints, minSize, maxSize);
+        var data = TrackGenerator.CreatePhysicsTrack(curve);
         _outWall.Polygon = [.. data.OuterWallPoints];
         _inWall.Polygon = [.. data.InnerWallPoints];
 
@@ -37,21 +31,41 @@ public partial class TrackCreator : Node
             Vector2 middle = inPoint + distance * 0.5f * dir;
 
             Area2D ch = new();
-            _checkpoints.AddChild(ch);
+            checkpoints.AddCheckpoint(ch);
+            parent.AddChild(ch);
             ch.GlobalPosition = middle;
 
             CollisionShape2D shape = new();
             ch.AddChild(shape);
             SegmentShape2D s = new()
             {
-              A = -distance * 0.5f * dir,
-              B = distance * 0.5f * dir,  
+                A = -distance * 0.5f * dir,
+                B = distance * 0.5f * dir,  
             };
             shape.Shape = s;
             shape.DebugColor = i == 0 ? Colors.Yellow : i == data.Checkpoints.Count - 1 ? Colors.Red : Colors.Green;
         }
-        _checkpoints.Update();
-        return _checkpoints;
+        return _lastCheckpoints = checkpoints;
     }
 
+
+    private void Clear()
+    {
+        _outWall.Polygon = [];
+        _inWall.Polygon = [];
+        _lastCheckpoints?.Clear();
+    }
+
+    private static CollisionPolygon2D CreatePolygon(Node2D parent)
+    {
+        StaticBody2D wall = new();
+        wall.AddToGroup("obstacle");
+        parent.AddChild(wall);
+        CollisionPolygon2D p = new()
+        {
+            BuildMode = CollisionPolygon2D.BuildModeEnum.Segments,  
+        };
+        wall.AddChild(p);
+        return p;
+    }
 }

@@ -1,18 +1,19 @@
+using System.Collections.Generic;
 using Godot;
 
-namespace Simulation.Scenes;
+namespace Simulation.Util;
 
 
-public partial class Checkpoints : Node2D
+public class Checkpoints
 {
     private const float StandartDistance = 250;
-    private Area2D[] _checkpoints;
+    private readonly List<Area2D> _checkpoints = [];
 
-    public int GetCheckpoints() => _checkpoints.Length;
+    public int GetCheckpointsNumber() => _checkpoints.Count;
     public Vector2 GetSpawnPoint() => _checkpoints[0].GlobalPosition;
     public float GetPctDistance(int nextIdx, Vector2 currentPos)
     {
-        if(nextIdx >= _checkpoints.Length) return 0;
+        if(nextIdx >= GetCheckpointsNumber()) return 0;
 
         float distance = StandartDistance;
         Vector2 c1 = _checkpoints[nextIdx].GlobalPosition;
@@ -26,25 +27,16 @@ public partial class Checkpoints : Node2D
         float currentDistance = currentPos.DistanceTo(c1);
         return Mathf.Max(1 - currentDistance / distance, 0);
     }
-    public int GetCheckpointIndex(Area2D checkpoint) => System.Array.IndexOf(_checkpoints, checkpoint);
-    public bool IsFinalCheckpoint(int idx) => idx == _checkpoints.Length - 1;
+    public int GetCheckpointIndex(Area2D checkpoint) => _checkpoints.IndexOf(checkpoint);
+    public bool IsFinalCheckpoint(int idx) => idx == GetCheckpointsNumber() - 1;
 
-    public void Update()
-    {
-        Godot.Collections.Array<Node> list = GetChildren();
-        _checkpoints = new Area2D[list.Count];
-
-        for (int i = 0; i < list.Count; i++)
-        {
-            Node child = list[i];
-            _checkpoints[i] = (Area2D)child;
-        }
-    }
+    public void AddCheckpoint(Area2D c) => _checkpoints.Add(c);
     public void Clear()
     {
-        for (var i = 0; i < GetChildCount(); i++)
+        for (var i = 0; i < GetCheckpointsNumber(); i++)
         {
-            GetChild(i).QueueFree();
+            _checkpoints[i].QueueFree();
         }
+        _checkpoints.Clear();
     }
 }

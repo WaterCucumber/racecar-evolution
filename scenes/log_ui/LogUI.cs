@@ -14,42 +14,30 @@ public partial class LogUI : CanvasLayer
     [Export] private Label _population;
 
     [Export] private EvolutionManager _manager;
+    private static LogUI _instance;
 
+    public Label Generation => _generation;
+    public Label Difficulty => _difficulty;
+    public Label BestFitness => _bestFitness;
+    public Label MutationRate => _mutationRate;
+    public Label Plato => _plato;
+    public Label Agents => _agents;
+    public Label Population => _population;
+
+
+    public static LogUI GetInstance() => _instance;
+    public static void Send(Label l, string value)
+    {
+        l.Text = value;
+    }
+    public static void Toggle(Label l, bool value)
+    {
+        l.Visible = value;
+    }
 
     public override void _Ready()
     {
-        _manager.EpochPass += OnEpochPass;
-        _manager.EpochStarted += OnEpochStarted;
-        _manager.AgentsChanged += OnAgentsChanged;
-        _population.Text = $"Population: {EvolutionManager.Population}";
-        Update();
-    }
-
-    private void OnAgentsChanged(int amount)
-    {
-        _agents.Text = $"Agents: {amount, 2}";
-    }
-
-    private void OnEpochStarted()
-    {
-        _difficulty.Text = $"Difficulty: {_manager.GetDifficulty(),2:F2}";
-    }
-
-    private void OnEpochPass()
-    {
-        _generation.Text = $"Generation: {_manager.GetGeneration(),3}";
-        _bestFitness.Text = $"Best Fitness: {_manager.GetBestFitness():F2} pt.";
-        _mutationRate.Text = $"Mutation Rate: {_manager.GetMutationRate()}";
-        _plato.Text = $"Plato: {_manager.GetPlato(), 2}";
-    }
-
-    private void Update()
-    {
-        _generation.Text = $"Generation: {_manager.GetGeneration(),3}";
-        _bestFitness.Text = $"Best Fitness: {_manager.GetBestFitness():F2} pt.";
-        _mutationRate.Text = $"Mutation Rate: {_manager.GetMutationRate()}";
-        _plato.Text = $"Plato: {_manager.GetPlato(), 2}";
-        _agents.Text = $"Agents: {_manager.GetAgents(), 2}";
-        _difficulty.Text = $"Difficulty: {_manager.GetDifficulty(),2:F2}";
+        _instance = this;
+        Population.Text = $"Population: {EvolutionManager.Population}";
     }
 }

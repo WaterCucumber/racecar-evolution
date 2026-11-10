@@ -93,11 +93,11 @@ public static class TrackGenerator
         Vector2 end = Vector2.Zero;
         foreach (var p in c.GetBakedPoints())
         {
-            if(p.X < pos.X) pos.X = p.X;
-            if(p.Y < pos.Y) pos.Y = p.Y;
+            if(p.X - 150 < pos.X) pos.X = p.X - 150;
+            if(p.Y - 150 < pos.Y) pos.Y = p.Y - 150;
 
-            if(p.X > end.X) end.X = p.X;
-            if(p.Y > end.Y) end.Y = p.Y;
+            if(p.X + 150 > end.X) end.X = p.X + 150;
+            if(p.Y + 150 > end.Y) end.Y = p.Y + 150;
         }
         Vector2 size = (end - pos).Abs();
         return new(pos, size);
