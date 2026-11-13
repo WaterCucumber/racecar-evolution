@@ -19,7 +19,7 @@ public class TrackCreator(Node2D parent)
 
         Checkpoints checkpoints = new();
         var curve = TrackGenerator.GenerateTrack(new(1152 / 2, 648 / 2), numPoints, minSize, maxSize);
-        var data = TrackGenerator.CreatePhysicsTrack(curve);
+        var data = TrackGenerator.CreatePhysicsTrack(curve, 15, 200);
         _outWall.Polygon = [.. data.OuterWallPoints];
         _inWall.Polygon = [.. data.InnerWallPoints];
 
@@ -60,6 +60,7 @@ public class TrackCreator(Node2D parent)
     {
         StaticBody2D wall = new();
         wall.AddToGroup("obstacle");
+        wall.CollisionLayer = 0b10;
         parent.AddChild(wall);
         CollisionPolygon2D p = new()
         {

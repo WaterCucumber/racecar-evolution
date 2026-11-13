@@ -6,7 +6,7 @@
 offsets = PackedFloat32Array(0.7582418, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_weoey"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v6ifw"]
 gradient = SubResource("Gradient_mhie3")
 width = 32
 height = 32
@@ -24,29 +24,30 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 metadata/_snap_enabled = true
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_v6ifw"]
-radius = 14.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ygklu"]
+size = Vector2(54, 28.000002)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_weoey"]
-radius = 15.0
-
-[node name="Agent" type="CharacterBody2D" unique_id=514686403 node_paths=PackedStringArray("_collisionCheckArea")]
+[node name="Agent" type="CharacterBody2D" unique_id=514686403 node_paths=PackedStringArray("_rayFirePoint", "_collisionCheckArea")]
 z_index = -1
 collision_layer = 0
 script = ExtResource("1_v6ifw")
+_rayFirePoint = NodePath("RayFirePoint")
 _collisionCheckArea = NodePath("CollisionCheckArea")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1622603587]
-texture = SubResource("GradientTexture2D_weoey")
+position = Vector2(0.24999881, 0)
+scale = Vector2(2.1093748, 1)
+texture = SubResource("GradientTexture2D_v6ifw")
 
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1481062837]
+[node name="RayFirePoint" type="Sprite2D" parent="." unique_id=1481062837]
 modulate = Color(1, 0, 0, 1)
-position = Vector2(8, 0)
+position = Vector2(29, 0)
 texture = SubResource("GradientTexture2D_p51cl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1865973664]
 visible = false
-shape = SubResource("CircleShape2D_v6ifw")
+position = Vector2(0, 9.5367426e-07)
+shape = SubResource("RectangleShape2D_ygklu")
 
 [node name="CollisionCheckArea" type="Area2D" parent="." unique_id=68036556]
 visible = false
@@ -54,4 +55,4 @@ collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionCheckArea" unique_id=167462037]
-shape = SubResource("CircleShape2D_weoey")
+shape = SubResource("RectangleShape2D_ygklu")

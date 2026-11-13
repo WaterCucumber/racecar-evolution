@@ -5,9 +5,11 @@ namespace Simulation.Scenes;
 
 public partial class Agent : Entity
 {
-    private const float MiddleRayLength = 800;
+    private const float MiddleRayLength = 200;
     private const float SideRayLength = 50;
     private const int TotalRays = 5; // Change With Carefulness
+
+    [Export] private Node2D _rayFirePoint;
 
     private Vector2[] _rays;
     private double[] _output;
@@ -48,15 +50,15 @@ public partial class Agent : Entity
     }
 
 
-/*
     public override void _Draw()
     {
+        if(_rays == null) return;
         for (var i = 0; i < _rays.Length; i++)
         {
             var ray = _rays[i];
-            DrawLine(Vector2.Zero, ray, Modulate * 0.5f);
+            DrawLine(Vector2.Zero, ray, Modulate * 0.75f);
         }
-    }*/
+    }
 
     /// <returns>[<all rays>, forward, lateral, angular]</returns>
     private double[] GetInputs(float delta, float oldRotation)
@@ -76,7 +78,7 @@ public partial class Agent : Entity
         // Set rays
         for (var i = 0; i < _rays.Length; i++)
         {
-            var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, _rays[i].Rotated(Rotation) + GlobalPosition);
+            var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, _rays[i].Rotated(Rotation) + _rayFirePoint.GlobalPosition);
             query.CollisionMask = 0b01;
             query.Exclude = [GetRid()];
             
@@ -87,10 +89,13 @@ public partial class Agent : Entity
                 inputs[i] = distancePercent;
             }
         }
+ 
+        float maxPossibleAngularVelocity = MaxSpeed * Mathf.Tan(MaxAngularVelocity) * RotationAcceleration;
 
         inputs[_rays.Length] = forwardSpeed / MaxSpeed;  
         inputs[_rays.Length + 1] = lateralVelocity / (MaxSpeed * 0.5);  
-        inputs[_rays.Length + 2] = angularVelocity / Mathf.Pi;  
+        inputs[_rays.Length + 2] = (angularVelocity + Mathf.Tau) / Mathf.Tau / maxPossibleAngularVelocity;  
+        //GD.Print($"Result: {inputs[_rays.Length + 2]}\tAV: {angularVelocity}");
         return inputs;
     }
 }

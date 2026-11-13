@@ -11,10 +11,9 @@ public class AgentScoringComponent
     // TODO: Replace Hard-coded variables
     private const float LapFitness = 250;
     public const float CheckpointFitness = 50;
-    private const float DeadDistanceToCheckpointFitness = 10;
     private const float NoCheckpointMaxTime = 5.0f;
     private const float InvalidCheckpointPenalty = 50;
-    private const float NoCheckpointPenalty = 250;
+    private const float NoCheckpointPenalty = 550;
     private const float BaseSlownessPenalty = 0.01f;
     private const float SlownessPenaltyGrow = 1.005f;
     private const float SlownessPenaltyMax = 5.0f;
@@ -80,8 +79,7 @@ public class AgentScoringComponent
     {
         if (body.IsInGroup("obstacle"))
         {
-            _fitness -= WallCollidePenalty;
-            _fitness += DeadDistanceToCheckpointFitness * _checkpoints.GetPctDistance(_nextCheckpointIndex, _entity.GlobalPosition);
+            _fitness -= WallCollidePenalty * (1 - _checkpoints.GetPctDistance(_nextCheckpointIndex, _entity.GlobalPosition));
             Died?.Invoke();
             Stop();
         }

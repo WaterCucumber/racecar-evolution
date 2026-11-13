@@ -17,7 +17,7 @@ public static class TrackGenerator
         public List<Vector2> OuterWallPoints { get; } = outerWallPoints;
     }
 
-    public static PhysicsTrackData CreatePhysicsTrack(Curve2D trackCurve, float trackWidth = 150f)
+    public static PhysicsTrackData CreatePhysicsTrack(Curve2D trackCurve, int checkpointsMod = 15, float trackWidth = 150f)
     {
         Vector2[] bakedPoints = trackCurve.GetBakedPoints(); 
 
@@ -51,7 +51,7 @@ public static class TrackGenerator
             outerWallPoints.Add(outerPoint);
             innerWallPoints.Add(innerPoint);
 
-            if (i % 15 == 0 && i > 0 && i < bakedPoints.Length - 15*10) 
+            if (i % checkpointsMod == 0 && i > 0 && i < bakedPoints.Length - checkpointsMod * 10) 
             {
                 checkpointPositions.Add((innerPoint, outerPoint)); 
             }

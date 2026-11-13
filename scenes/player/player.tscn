@@ -7,7 +7,7 @@
 offsets = PackedFloat32Array(0.7582418, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_weoey"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dovo2"]
 gradient = SubResource("Gradient_mhie3")
 width = 32
 height = 32
@@ -16,7 +16,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 metadata/_snap_enabled = true
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_p51cl"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gmlin"]
 gradient = SubResource("Gradient_mhie3")
 width = 16
 height = 16
@@ -36,13 +36,15 @@ collision_layer = 0
 script = ExtResource("1_dovo2")
 _collisionCheckArea = NodePath("CollisionCheckArea")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1622603587]
-texture = SubResource("GradientTexture2D_weoey")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1186181452]
+position = Vector2(0.24999881, 0)
+scale = Vector2(2.1093748, 1)
+texture = SubResource("GradientTexture2D_dovo2")
 
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1481062837]
+[node name="RayFirePoint" type="Sprite2D" parent="." unique_id=767822983]
 modulate = Color(1, 0, 0, 1)
-position = Vector2(8, 0)
-texture = SubResource("GradientTexture2D_p51cl")
+position = Vector2(29, 0)
+texture = SubResource("GradientTexture2D_gmlin")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1865973664]
 visible = false

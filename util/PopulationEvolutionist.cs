@@ -35,7 +35,7 @@ public static class PopulationEvolutionist
     {
         var result = new Genome[population.Length];
 
-        int eliteLength = Mathf.Min(3, population.Length);
+        int eliteLength = Mathf.Min(5, population.Length);
         for (var i = 0; i < eliteLength; i++)
         {
             result[i] = population[i].GetGenome();
@@ -53,7 +53,7 @@ public static class PopulationEvolutionist
         return result;
     }
 
-    private static Agent SelectParent(Agent[] population, float topParentsPct = 0.3f)
+    private static Agent SelectParent(Agent[] population, float topParentsPct = 0.2f)
     {
         Agent[] a = new Agent[3];
         int topParents = (int)(population.Length * topParentsPct);

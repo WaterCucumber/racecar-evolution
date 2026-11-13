@@ -11,8 +11,7 @@ script = ExtResource("1_8fcpc")
 
 [node name="EvolutionManager" type="Node2D" parent="." unique_id=275641612]
 script = ExtResource("1_h4ypv")
-_saveFile = "evoluted-T-0.json"
-_loadFile = "best_brain-T.json"
+_saveFile = "updatedcar1-best-brain.json"
+_loadFile = ""
 
-[node name="LogUI" parent="." unique_id=1104546606 node_paths=PackedStringArray("_manager") instance=ExtResource("2_h4ypv")]
-_manager = NodePath("")
+[node name="LogUI" parent="." unique_id=1104546606 instance=ExtResource("2_h4ypv")]

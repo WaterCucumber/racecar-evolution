@@ -40,7 +40,7 @@ public partial class EvolutionManager : Node2D
         _started = true;
 
         _pool = new(Population, this);
-        _difficultyManager = new(this, _pool, 7);
+        _difficultyManager = new(this, _pool);
         _difficultyManager.TrackReady += OnTrackReady;
 
         var gens = PopulationEvolutionist.GetStartGenomes(Population, _loadFile);

@@ -50,7 +50,11 @@ public partial class Genome : Resource
         {
             Property[keyValuePair.Key] *= _random.NextSingle() * 0.5f + 0.5f;
         }
-        Property[PropertyType.Color] *= 1.5f;
+        int color = (int)Property[PropertyType.Color];
+        byte r = (byte)(((color >> 16) & 0xFF) + 256 * rate * _random.NextDouble()); 
+        byte g = (byte)(((color >> 8) & 0xFF) + 256 * rate * _random.NextDouble());  
+        byte b = (byte)((color & 0xFF) + 256 * rate * _random.NextDouble());  
+        Property[PropertyType.Color] = (r << 16) + (g << 8) + b;
         Brain.Mutate(rate);
         Brain.Data.Generation++;
     }
